@@ -1,4 +1,4 @@
-# Chapter 2: The Root Component
+# Chapter 2: The Shell Component
 
 ## 1 Project Files
 
@@ -12,11 +12,11 @@ You can ignore most files except those in `src` folder when you are a beginner A
 
 The built-in web server, started by the `ng serve` command, watches project source code changes and will rebuild the project when there is a change.
 
-## 2 The Root Component
+## 2 The Shell Component
 
-In Angular, a web page are built from one or more components. A component is similar to a native HTML element that has a view and some interactive behaviors. Similar to a typical HTML page, a component usualy consists of three files: an HTML template file, a CSS style file, and a TypeScript code file. A website has a home page and an Angular application has a root component.
+In Angular, a web page are built from one or more components. A component is similar to a native HTML element that has a view and some interactive behaviors. Similar to a typical HTML page, a component usualy consists of three files: an HTML template file, a CSS style file, and a TypeScript code file. A website has a home page and an Angular application has a shell component.
 
-Use your IDE to open the `angular-tour-of-heroes` folder. The application source code is in the `src/` folder. The `src/app` folder has the three files for the root component.
+Use your IDE to open the `angular-tour-of-heroes` folder. The application source code is in the `src/` folder. The `src/app` folder has the three files for the shell component.
 
 - `app.component.ts`: the TS code file that defines the component class.
 - `app.component.html`: the HTML template file.
@@ -28,7 +28,7 @@ The `app.component.html` is a standard HTML file that defines the HTML elements 
 
 The `app.component.css` is used to define local styles that only affect the view of this component. To define application wide style, use the `src/styles.css` file.
 
-## 3 Changing the Root Component
+## 3 Changing the Shell Component
 
 Just change the title line while keep other lines untouched as the following in `app.component.ts` file.
 
@@ -100,9 +100,9 @@ export class AppComponent {
 
 The first line imports `Component` class defined in an Angular package `@angular/core`.
 
-The `@Component({...})` has a special prefix `@` before the class name. It means that the class is a decorator. Decorator is a language feature in TypeScript. A decorator is used to provide metadata to other classes/functions/properties. As shown above, its parameters provide the `selector`, `templateUrl` and `styleUrls` to the `AppComponent`.
+The `@Component({...})` has a special prefix `@` before the class name. It means that the class is a decorator function. Decorator is a language feature in TypeScript. A decorator is used to provide metadata to other classes/functions/properties. As shown above, its parameters provide the `selector`, `templateUrl` and `styleUrls` to the `AppComponent`.
 
-The `selector` specifies the html tag for this component to be used. Because this is the root component, it is used in the `src/index.html`. It is not a suprise that the `src/index.html` file only has the `app-root` element in its `<body>` element:
+The `selector` specifies the html tag for this component to be used. Because this is the shell component, it is used in the `src/index.html`. It is not a suprise that the `src/index.html` file only has the `app-root` element in its `<body>` element:
 
 ```html
 <body>

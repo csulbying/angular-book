@@ -1,12 +1,14 @@
 # Chapter 3: Add a New Component
 
-In this chapter, you add a new component that is used by the root component to display and edit detail data of a hero.
+In this chapter, you add a new component that is used by the shell component to display and edit detail data of a hero.
 
 ## 1 Create the Heros Component
 
 An Angular component usually has three files that work togerther to define a view and its behaviors. To create a new component, it is easier to use the Angular CLI than to create them manually.
 
 Run `ng generate component heroes`, the command create a new folder `src/app/heroes/` and generates four new files in the folder. In addition to the component class file `heroes.component.ts`, html file `heroes.component.html`, and css file `heroes.component.css`, there is a file named `heroes.component.spec.ts`. A file with postfix of `.spec.ts` is a unit test file. You don't use it now and can delete it.
+
+An Angular component has a lifecycle that is managed by Angular. The `ngOnInit()` is a [liefcycle hook method](https://angular.io/guide/lifecycle-hooks#oninit) that is called during the component's initialization.
 
 ## 2 Create a Hero Class
 
@@ -44,7 +46,7 @@ export class HeroesComponent implements OnInit {
 }
 ```
 
-In this component class file, you first import classes/interfaces used by the current component. Then use `@Component({...})` to define meta-data for the component. The `templateUrl` and `styleUrls` are obvious: they point to the HTML template file and the style files. The `selector: 'app-heroes'` meta-data defines the HTML tag name used by other components to include this component in their views. To use it in the root component, edit `App.component.html` to have the following content:
+In this component class file, you first import classes/interfaces used by the current component. Then use `@Component({...})` to define meta-data for the component. The `templateUrl` and `styleUrls` are obvious: they point to the HTML template file and the style files. The `selector: 'app-heroes'` meta-data defines the HTML tag name used by other components to include this component in their views. To use it in the shell component, edit `App.component.html` to have the following content:
 
 ```html
 <h1>{{title}}</h1>
@@ -84,13 +86,13 @@ Two-way binding is a big feature of Angular and it is not a surprise that it is 
 
 The `[(ngModel)]` binds the `<input>` element value with the `hero.name` instance property, in both direction.
 
-However, when you save the file, the web page goes blank because there is an error in the updated code. In Chrome, use the dev tools to check the console output, you can see an error message: `Template parse errors: Can't bind to 'ngModel' since it isn't a known property of 'input'.`. It means that Angular doesn't understand the `ngModel`. The reason is that the `ngModel` is defined in another place and needs to be imported into this application.
+However, there is an error in the updated code. In Chrome, use the dev tools to check the console output, you can see an error message: `Can't bind to 'ngModel' since it isn't a known property of 'input'.`. It means that Angular doesn't understand the `ngModel`. The reason is that the `ngModel` is defined in another place and needs to be imported into this application.
 
 ## Import a Module
 
 Angular uses `module` to organize subsystems of an application. Angular comes with some built-in modules that provide common functions such as HTML form manipulation, http request, routing, and etc. Actually every component needs to be imported and declared in a module before it can be used.
 
-For example, the root component is imported by a module, the so-called root module with a class name `AppModule` define in the `src/app/app.module.ts`. The `HeroesComponent` is also imported and declared. The corresponding code is as the following:
+For example, the shell component is imported by a module, the so-called root module with a class name `AppModule` define in the `src/app/app.module.ts`. The `HeroesComponent` is also imported and declared. The corresponding code is as the following:
 
 ```ts
 import { AppComponent } from './app.component'
@@ -104,7 +106,7 @@ declarations: [
 bootstrap: [AppComponent]
 ```
 
-The last line `bootstrap: [AppComponent]` in the above code has a special meaning: the `AppComponent` is the first component, the root component, of the applicaiton.
+The last line `bootstrap: [AppComponent]` in the above code has a special meaning: the `AppComponent` is the first component, the shell component, of the applicaiton.
 
 To use components and services from a different module, you need to 1) import the module, and 2) declare it in the `imports` meta-data section, both in the module that uses the components or the services.
 

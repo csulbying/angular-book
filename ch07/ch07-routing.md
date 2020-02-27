@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
 }
 ```
 
-Now add a dashboard link to the root component template, the `src/app/app.component.html` file has the following code:
+Now add a dashboard link to the shell component template, the `src/app/app.component.html` file has the following code:
 
 ```html
 <h1>{{ title }}</h1>

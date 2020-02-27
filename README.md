@@ -8,7 +8,7 @@ The completed source code is in [https://github.com/csulbying/firebase-demo](htt
 
 [Chapter 1 Getting Started](./ch01/ch01-getting-started.md)
 
-[Chapter 2 The Root Component](./ch02/ch02-the-root-component.md)
+[Chapter 2 The Shell Component](./ch02/ch02-the-shell-component.md)
 
 [Chapter 3 Add a New Component](./ch03/ch03-add-new-component.md)
 
