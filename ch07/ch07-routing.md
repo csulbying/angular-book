@@ -13,8 +13,8 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 @NgModule({
-  imports: [CommonModule],
   declarations: [],
+  imports: [CommonModule],
 })
 export class AppRoutingModule {}
 ```
@@ -60,7 +60,7 @@ You should call `RouterModule.forRoot(routes)` for the applicaton root level rou
 To display a component when its path matches in an url, use the `router-outlet` element tag. It is provided by the `RouterModule`. Change the `src/app/app.component.html` to have the following content:
 
 ```html
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 <nav><a routerLink="/heroes">Heroes</a></nav>
 <router-outlet></router-outlet>
 ```
@@ -71,21 +71,7 @@ You can click the link to navigate to the heroes view too. The `routerLink` attr
 
 ## 4 Add a Dashboard View
 
-Now add a new component `DshboardComponent` that display top 5 heroes from the heroes list. You also want to make it as the default route.
-
-Now the routes has the following content:
-
-```ts
-const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'heroes', component: HeroesComponent },
-]
-```
-
-The first path is the default path that matches `/`, the root url path. The `pathMatch: 'full'` means that it cannot have anything after the `'/'` because by default the empty string `''` matches any path as its prefix or suffix.
-
-Use `ng g c dashboard` to create a new dashboard component. The template file has the following content:
+Now add a new component `DshboardComponent` that display top 5 heroes from the heroes list. Use `ng g c dashboard` to create a new dashboard component. The template file has the following content:
 
 ```html
 <h3>Top Heroes</h3>
@@ -119,13 +105,101 @@ export class DashboardComponent implements OnInit {
 }
 ```
 
+The `dashboard.component.css` file has the following content:
+
+```css
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+a {
+  text-decoration: none;
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+h3 {
+  text-align: center;
+  margin-bottom: 0;
+}
+h4 {
+  position: relative;
+}
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 25%;
+}
+.module {
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+  max-height: 120px;
+  min-width: 120px;
+  background-color: #3f525c;
+  border-radius: 2px;
+}
+.module:hover {
+  background-color: #eee;
+  cursor: pointer;
+  color: #607d8b;
+}
+.grid-pad {
+  padding: 10px 0;
+}
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+@media (max-width: 600px) {
+  .module {
+    font-size: 10px;
+    max-height: 75px;
+  }
+}
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0;
+  }
+  .module {
+    min-width: 60px;
+  }
+}
+```
+
 Now add a dashboard link to the shell component template, the `src/app/app.component.html` file has the following code:
 
 ```html
 <h1>{{ title }}</h1>
-<nav><a routerLink="/heroes">Heroes</a> &nbsp; &nbsp; <a routerLink="/dashboard">Dashboard</a></nav>
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
 <router-outlet></router-outlet>
 ```
+
+You also want to make it as the default route.
+
+Now the routes has the following content:
+
+```ts
+const routes: Routes = [
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'heroes', component: HeroesComponent },
+]
+```
+
+The first path is the default path that matches `/`, the root url path. The `pathMatch: 'full'` means that it cannot have anything after the `'/'` because by default the empty string `''` matches any path as its prefix or suffix.
 
 ## 5 Navigating to Details
 
@@ -135,21 +209,13 @@ Currently the deatil component is at the page bottom. It should be accessible vi
 - By clicking a hero in the heroes list
 - By manually typing a "deep link" URL in the browser address bar.
 
-First, remove `<app-hero-detail>` element from the `heroes.component.html`. Then, add a hero detail route in `src/app/app-routing.module.ts`.
-
-```ts
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component'
-
-{ path: 'detail/:id', component: HeroDetailComponent },
-```
-
-Change `src/app/heroes/heroes.component.html` as the following:
+First, remove `<app-hero-detail>` element from the `heroes.component.html`. Change `src/app/heroes/heroes.component.html` as the following:
 
 ```html
 <h2>My Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{hero.id}}"> {{ hero.id }} {{ hero.name }}</a>
+    <a routerLink="/detail/{{ hero.id }}"> {{ hero.id }} {{ hero.name }}</a>
   </li>
 </ul>
 ```
@@ -179,20 +245,44 @@ export class HeroesComponent implements OnInit {
 }
 ```
 
+Finally, add a hero detail route in `src/app/app-routing.module.ts`.
+
+```ts
+import { HeroDetailComponent }  from './hero-detail/hero-detail.component'
+
+{ path: 'detail/:id', component: HeroDetailComponent },
+```
+
 ## 6 Get Router Parameter
 
 So far the hero id is embedded in the `routeLink`. A user may also input a url like `~/detail/11` in the browser's address bar. In `HeroDetailComponent`, you need to retrieve the hero id from the url using the following code:
 
 ```ts
-ngOnInit() {
+import { Component, OnInit, Input } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+
+import { Hero } from '../hero'
+import { HeroService } from '../hero.service'
+
+@Component({
+  selector: 'app-hero-detail',
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.css'],
+})
+export class HeroDetailComponent implements OnInit {
+  hero: Hero
+  ngOnInit(): void {
     this.getHero()
   }
 
-  private getHero() {
-    const id = this.route.snapshot.paramMap.get('id')
-    const getHero$ = this.heroService.getHero(Number(id))
-    getHero$.subscribe(hero => (this.hero = hero))
+  constructor(private route: ActivatedRoute, private heroService: HeroService) {}
+
+  getHero(): void {
+    // The JavaScript (+) operator converts the string to a number, which is what a hero id should be.
+    const id = +this.route.snapshot.paramMap.get('id')
+    this.heroService.getHero(id).subscribe(hero => (this.hero = hero))
   }
+}
 ```
 
 Open HeroService and add this getHero() method:
