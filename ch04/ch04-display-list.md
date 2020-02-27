@@ -10,7 +10,7 @@ Create a TS file `src/app/mock-heroes.ts` to export a list of heroes as the foll
 import { Hero } from './hero'
 
 export const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
+  { id: 11, name: 'Dr. Nice' },
   { id: 12, name: 'Narco' },
   { id: 13, name: 'Bombasto' },
   { id: 14, name: 'Celeritas' },
@@ -35,7 +35,7 @@ export class HeroesComponent implements OnInit {
 }
 ```
 
-Please remove the old `hero` property and the initial `Hero` object.
+Please remove the old `hero` property.
 
 In html, the `<ul>` and `<li>` are used to display an unordered list of items. Angular uses `*ngFor` to create repeated `<li>` elements for a list of items. Change the `heroes.component.html` to have the following content:
 
@@ -56,10 +56,6 @@ In Angular, the steyles defined in a component's style file -- specified by the 
 
 ```css
 /* HeroesComponent's private CSS styles */
-.selected {
-  background-color: #cfd8dc !important;
-  color: white;
-}
 .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
@@ -76,25 +72,25 @@ In Angular, the steyles defined in a component's style file -- specified by the 
   height: 1.6em;
   border-radius: 4px;
 }
-.heroes li.selected:hover {
-  background-color: #bbd8dc !important;
-  color: white;
-}
 .heroes li:hover {
   color: #607d8b;
   background-color: #ddd;
   left: 0.1em;
 }
-.heroes .text {
-  position: relative;
-  top: -3px;
+.heroes li.selected {
+  background-color: #cfd8dc;
+  color: white;
+}
+.heroes li.selected:hover {
+  background-color: #bbd8dc;
+  color: white;
 }
 .heroes .badge {
   display: inline-block;
   font-size: small;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607d8b;
+  background-color: #405061;
   line-height: 1em;
   position: relative;
   left: -1px;
@@ -140,8 +136,8 @@ To fix this bug, you need the `*ngIf` directive. Again, the `*` prefix means tha
 
 ```html
 <div *ngIf="selectedHero">
-  <h2>{{selectedHero.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{selectedHero.id}}</div>
+  <h2>{{ selectedHero.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ selectedHero.id }}</div>
   <div>
     <label>name: <input [(ngModel)]="selectedHero.name" placeholder="name" /> </label>
   </div>
