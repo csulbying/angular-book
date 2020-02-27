@@ -1,6 +1,6 @@
 # Chapter 1: Getting Started
 
-This book is an attempt to present the "official" Angular [Tour of Hereos Tutorial](https://angular.io/tutorial) in a step-by-step easy-to-understand way. It is mostly based on the [official Angular docmentation](https://angular.io/docs) and used the same MIT license. Most code are directly copied from the Angular documentation web site. During the development process, related Angular concepts are introduced.
+This book is an attempt to present the "official" Angular [Tour of Hereos Tutorial](https://angular.io/tutorial) in a step-by-step easy-to-understand way. It is mostly based on the [official Angular docmentation](https://angular.io/docs) and used the same MIT license. Most code are directly copied from the Angular documentation web site. During the development process, relevant Angular concepts are introduced and explained.
 
 ## 1 Introduction
 

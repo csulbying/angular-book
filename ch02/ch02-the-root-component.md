@@ -2,7 +2,7 @@
 
 ## 1 Project Files
 
-The new Angular project is create in a `angular-tour-of-heroes` foler -- the name specified in the `ng new` command. In this folder, the Angular CLI generates several folders and a number of files including source code, enviornment settings, testing and etc.
+The new Angular project is created in a `angular-tour-of-heroes` foler -- the name specified in the `ng new` command. In this folder, the Angular CLI generates several folders and a number of files including source code, enviornment settings, testing and etc.
 
 As a regular Node.js project, the required packages are defined in `package.json` file and all packages are installed in the `node_modules` folder.
 
@@ -56,7 +56,8 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
-h2, h3 {
+h2,
+h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
@@ -64,7 +65,9 @@ h2, h3 {
 body {
   margin: 2em;
 }
-body, input[type="text"], button {
+body,
+input[type='text'],
+button {
   color: #333;
   font-family: Cambria, Georgia;
 }
