@@ -71,7 +71,7 @@ You can click the link to navigate to the heroes view too. The `routerLink` attr
 
 ## 4 Add a Dashboard View
 
-Now add a new component `DshboardComponent` that display top 5 heroes from the heroes list. Use `ng g c dashboard` to create a new dashboard component. The template file has the following content:
+Now add a new component `DshboardComponent` that display 4 heroes from the heroes list. Use `ng g c dashboard` to create a new dashboard component. The template file has the following content:
 
 ```html
 <h3>Top Heroes</h3>
