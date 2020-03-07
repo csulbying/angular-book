@@ -158,4 +158,4 @@ In this case, you want to add a `selected` class to the currently selected hero.
 
 Now the page should look like the following:
 
-![Heros list](./firebase-01.png)
+![Heros list](./ch04-2.png)
