@@ -47,7 +47,9 @@ Replace the content of the `app.component.html` to have the following content:
 
 The double curly braces in `{{title}}` means that the `title` is a TS expression. Angular evaluates it and display its output in its place. It turns out that `title` is a property of the component class and its value `'Tour of Heroes'` is used as the content of the HTML `h1` tag.
 
-Edit the `src/app/app.component.css` file to have the following styles.
+## 4 Application Style
+
+Edit the `src/style.css` file to have the following styles.
 
 ```css
 /* Application-wide Styles */
@@ -81,7 +83,7 @@ If you keep your browser open, all changes are reflected in your browser lively.
 
 ![Tour of Heroes Page](./ch02-1.png)
 
-## 4 The Component Class
+## 5 The Component Class
 
 The component class file `app.component.ts` has the following content:
 
